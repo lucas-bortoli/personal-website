@@ -1,0 +1,69 @@
+.article a {
+	color: rgb(121, 121, 0);
+	font-weight: bold;
+}
+
+.article a:active {
+	color: red;
+}
+
+.article {
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+/* Title heading */
+.article > .title {
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 72px;
+	text-transform: capitalize;
+	height: 198px;
+	border-bottom: 8px solid yellow;
+	margin-top: 0;
+	margin-bottom: 2rem;
+	line-height: 1.5em;
+	display: flex;
+	align-items: center;
+}
+
+.article footer {
+	padding-top: 10rem;
+	padding-bottom: 5rem;
+	color: #646464;
+}
+
+.article code {
+	padding: 3px 6px;
+	border: 1px solid #ccc;
+}
+
+@media screen and (max-width: 1280px) {
+}
+
+@media screen and (max-width: 992px) {
+	.article > .title {
+		font-size: 48px;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	.article > .title {
+		font-size: 36px;
+	}
+
+	.article {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.article {
+		font-size: 12px;
+	}
+
+	.article > .title {
+		margin-top: 1rem !important;
+		margin-bottom: 1rem !important;
+		height: unset !important;
+	}
+}

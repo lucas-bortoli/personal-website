@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+html,
+body {
+	margin: 0;
+	--sidebar-width: 540px;
+	--sidebar-space-left: 8rem;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+::selection {
+	background-color: yellow;
+	color: black;
+}
+
+.header ul {
+	list-style: none;
+}
+
+a {
+	color: blue;
+}
+
+a:active {
+	color: red;
+}
+
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	background-color: #f0f0f0;
+	width: var(--sidebar-width);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+}
+
+.sidebar .logo {
+	font-family: "Bebas Neue", sans-serif;
+	color: #323232;
+	font-size: 72px;
+	display: inline-block;
+	padding: 1rem;
+	padding-left: var(--sidebar-space-left);
+	background-color: yellow;
+	font-weight: 200;
+}
+
+.sidebar .article-title {
+	font-family: "Bebas Neue", sans-serif;
+	color: #323232;
+	font-size: 48px;
+	display: inline-block;
+	padding: 1rem;
+}
+
+.sidebar nav {
+	display: flex;
+	flex-direction: column;
+	padding: 2rem;
+	padding-left: var(--sidebar-space-left);
+	align-items: flex-start;
+}
+
+.sidebar nav a {
+	padding: 1rem 2rem;
+	font-size: 1.75rem;
+	background-color: white;
+	font-family: "Bebas Neue", sans-serif;
+	color: #323232;
+	text-decoration: none;
+}
+
+.copyright {
+	padding: 1rem 2rem;
+	padding-left: var(--sidebar-space-left);
+	font-size: 1rem;
+	color: #646464;
+}
+
+.article {
+	margin-left: var(--sidebar-width);
+	padding: 1rem;
+	padding-top: 0;
+}
+
+@media screen and (max-width: 1280px) {
+	html,
+	body {
+		--sidebar-width: 460px;
+		--sidebar-space-left: 4rem;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	html,
+	body {
+		--sidebar-width: 320px;
+		--sidebar-space-left: 2rem;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	html,
+	body {
+		font-size: 12px;
+	}
+
+	.sidebar .logo {
+		font-size: 36px;
+		align-items: center;
+		display: flex;
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.sidebar {
+		position: unset;
+		width: 100vw;
+		height: auto;
+	}
+
+	.sidebar nav {
+		align-items: stretch;
+		gap: 0.25rem;
+	}
+
+	.sidebar .copyright {
+		display: none;
+	}
+
+	.article {
+		margin-left: unset;
+	}
+}
