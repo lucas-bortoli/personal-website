@@ -12,7 +12,7 @@ import {
 	STATIC_DIRECTORY,
 	TEMPLATE_DIRECTORY,
 } from "./constants.js";
-import brittle from "./brittle.js";
+import brittle from "brittle-templates";
 import { marked } from "marked";
 import { gfmHeadingId } from "marked-gfm-heading-id";
 import { markedHighlight } from "marked-highlight";
@@ -42,6 +42,7 @@ const PAGE_TEMPLATE = await fs.promises.readFile(
 
 interface PageHeader {
 	Title: string;
+	Description?: string;
 	CreatedAt?: Date;
 	LastUpdated?: Date;
 }
@@ -92,6 +93,7 @@ const main = async () => {
 		});
 		data = PAGE_TEMPLATE.replaceAll("{page_body}", data);
 		data = data.replaceAll("{page_title}", title);
+		data = data.replaceAll("{page_description}", header.Description ?? "");
 		data = data.replaceAll("{current_year}", "" + new Date().getFullYear());
 		data = data.replaceAll(
 			"{footer_info}",
