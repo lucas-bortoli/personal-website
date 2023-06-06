@@ -1,10 +1,10 @@
 .article a {
-	color: rgb(121, 121, 0);
-	font-weight: bold;
+	color: var(--color-link);
 }
 
 .article a:active {
-	color: red;
+	color: var(--color-text);
+	background-color: var(--color-primary);
 }
 
 .article {
@@ -13,8 +13,7 @@
 }
 
 .article > header {
-	
-	border-bottom: 8px solid yellow;
+	border-bottom: 8px solid var(--color-primary);
 }
 
 .article > header > .title {
@@ -32,7 +31,7 @@
 .article footer {
 	padding-top: 10rem;
 	padding-bottom: 5rem;
-	color: #646464;
+	color: var(--color-text-secondary);
 }
 
 .article code {

@@ -5,11 +5,15 @@ body {
 	margin: 0;
 	--sidebar-width: 540px;
 	--sidebar-space-left: 8rem;
+	--color-primary: #ffca85;
+	--color-text: #323232;
+	--color-text-secondary: #646464;
+	--color-link: #b77117;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 ::selection {
-	background-color: yellow;
+	background-color: var(--color-primary);
 	color: black;
 }
 
@@ -19,10 +23,11 @@ body {
 
 a {
 	color: blue;
+	text-decoration: none;
 }
 
-a:active {
-	color: red;
+a:hover {
+	text-decoration: underline;
 }
 
 .sidebar {
@@ -38,18 +43,18 @@ a:active {
 
 .sidebar .logo {
 	font-family: "Bebas Neue", sans-serif;
-	color: #323232;
+	color: var(--color-text);
 	font-size: 72px;
 	display: inline-block;
 	padding: 1rem;
 	padding-left: var(--sidebar-space-left);
-	background-color: yellow;
+	background-color: var(--color-primary);
 	font-weight: 200;
 }
 
 .sidebar .article-title {
 	font-family: "Bebas Neue", sans-serif;
-	color: #323232;
+	color: var(--color-text);
 	font-size: 48px;
 	display: inline-block;
 	padding: 1rem;
@@ -68,7 +73,7 @@ a:active {
 	font-size: 1.75rem;
 	background-color: white;
 	font-family: "Bebas Neue", sans-serif;
-	color: #323232;
+	color: var(--color-text);
 	text-decoration: none;
 }
 
@@ -76,7 +81,7 @@ a:active {
 	padding: 1rem 2rem;
 	padding-left: var(--sidebar-space-left);
 	font-size: 1rem;
-	color: #646464;
+	color: var(--color-text-secondary);
 }
 
 .article {
