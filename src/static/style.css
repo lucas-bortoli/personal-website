@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap');
 
 html,
 body {
@@ -9,7 +9,8 @@ body {
 	--color-text: #323232;
 	--color-text-secondary: #646464;
 	--color-link: #b77117;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Montserrat', Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 18px;
 }
 
 ::selection {
@@ -49,7 +50,7 @@ a:hover {
 	padding: 1rem;
 	padding-left: var(--sidebar-space-left);
 	background-color: var(--color-primary);
-	font-weight: 200;
+	line-height: 1;
 }
 
 .sidebar .article-title {
@@ -85,9 +86,21 @@ a:hover {
 }
 
 .article {
-	margin-left: var(--sidebar-width);
 	padding: 1rem;
 	padding-top: 0;
+	max-width: 80ch;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.article-wrapper {
+	width: calc(100% - var(--sidebar-width));
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 @media screen and (max-width: 1280px) {
@@ -104,12 +117,23 @@ a:hover {
 		--sidebar-width: 320px;
 		--sidebar-space-left: 2rem;
 	}
+
+	.sidebar nav {
+		align-items: stretch;
+		gap: 0.25rem;
+		text-align: center;
+	}
 }
 
 @media screen and (max-width: 720px) {
 	html,
 	body {
 		font-size: 12px;
+		--sidebar-width: 0px;
+	}
+
+	.article-wrapper {
+		position: static;
 	}
 
 	.sidebar .logo {
@@ -117,18 +141,11 @@ a:hover {
 		align-items: center;
 		display: flex;
 	}
-}
 
-@media screen and (max-width: 540px) {
 	.sidebar {
 		position: unset;
-		width: 100vw;
+		width: 100%;
 		height: auto;
-	}
-
-	.sidebar nav {
-		align-items: stretch;
-		gap: 0.25rem;
 	}
 
 	.sidebar .copyright {

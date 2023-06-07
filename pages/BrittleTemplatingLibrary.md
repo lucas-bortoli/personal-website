@@ -1,7 +1,7 @@
 Title: The Brittle Templating Library
-Description: The Brittle Templating Library is a markdown preprocessor that enables the generation of dynamic content for static sites. It supports inline JS templates and was created in 90 minutes, making it somewhat brittle but functional.
-Created at: 2023-06-04
-Updated at: 2023-06-06
+Description: A quirky, kind of brittle markdown preprocessor for generating dynamic content using inline JS templates. It works (maybe).
+Created at: 2023-06-04 17:12
+Updated at: 2023-06-07 10:36
 
 ---
 
@@ -65,4 +65,27 @@ The following list was generated with Brittle:
 \[`for (let x = 1; x <= 5; x++) {`]
 \[=`x`]. This is 'a' repeated \[=`x`] times: \[=`'a'.repeat(x)`] \[=`'\\n'`]
 \[`}`]
+```
+
+## Then I went and made it a public library
+
+So you can use Brittle right now.
+
+Here's the [npm link](https://www.npmjs.com/package/brittle-templates). And here's the [GitHub repository](https://github.com/lucas-bortoli/brittle-templating).
+
+You can install Brittle using npm:
+
+```shell
+npm install brittle-templates
+```
+
+To use the library, you need to import `brittle-templates` and utilize the `runTemplate` function. Here's an example of generating a document using a template:
+
+```js
+import fs from "fs";
+import runTemplate from "brittle-templates";
+
+const source = fs.readFileSync("input.md", "utf-8");
+const output = runTemplate(source);
+fs.writeFileSync("output.md", output, "utf-8");
 ```
