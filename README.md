@@ -1,4 +1,4 @@
-# My Aunt's Basement
+# Personal Website
 
 This is a simple static site generator built with Node.js that converts Markdown files into HTML files for creating a blog. It reads Markdown files located in the `pages/` folder, applies a template from `src/templates/page.html`, and generates corresponding HTML files in the `www/` directory. Additionally, static files such as fonts and images are copied from `src/static/` to `www/`.
 
@@ -7,13 +7,13 @@ This is a simple static site generator built with Node.js that converts Markdown
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/lucas-bortoli/jsblog.git
+   git clone https://github.com/lucas-bortoli/personal-website.git
    ```
 
 2. Navigate to the project directory:
 
    ```shell
-   cd jsblog
+   cd personal-website
    ```
 
 3. Install the dependencies:
@@ -27,7 +27,7 @@ This is a simple static site generator built with Node.js that converts Markdown
 To start the blog generator, use the following command:
 
 ```shell
-npm run start
+npm run build
 ```
 
 This command internally uses `ts-node` to execute the TypeScript code. The generated static website will be available in the `www/` directory.
@@ -35,22 +35,6 @@ This command internally uses `ts-node` to execute the TypeScript code. The gener
 ## Configuration
 
 The blog generator assumes the following directory structure:
-
-```
-jsblog/
-├─ pages/
-│  ├─ post1.md
-│  ├─ post2.md
-│  └─ ...
-├─ src/
-│  ├─ templates/
-│  │  └─ page.html
-│  └─ static/
-│     ├─ article.css
-│     ├─ style.css
-│     └─ ...
-└─ www/
-```
 
 - The `pages/` directory contains the Markdown files that will be converted into HTML files.
 - The `src/templates/page.html` file represents the template used for generating the HTML files.
