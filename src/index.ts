@@ -3,10 +3,8 @@ import { extname, join, relative, dirname, basename } from "path";
 import {
   buildPageInfo,
   copyDirChildren,
-  dateHuman,
-  extractTitleFromMarkdown,
+  getTemplate,
   replaceHrefsInHTML,
-  replaceTemplateVariables,
   walk,
 } from "./utils.js";
 import {
@@ -21,6 +19,8 @@ import { gfmHeadingId } from "marked-gfm-heading-id";
 import { markedHighlight } from "marked-highlight";
 import { toPascalCase } from "js-convert-case";
 import hljs from "highlight.js";
+import * as brittleLib from "./brittleLib.js";
+import { Article, parseArticle } from "./parser.js";
 
 marked.use(
   gfmHeadingId({
@@ -38,91 +38,22 @@ marked.use(
   })
 );
 
-const PAGE_TEMPLATE = await fs.promises.readFile(
-  join(TEMPLATE_DIRECTORY, "page.html"),
-  "utf-8"
-);
+const parseMarkdownFile = async (file: string): Promise<Article> => {
+  const fileContents = await fs.promises.readFile(file, "utf-8");
+  const article = await parseArticle(file, fileContents);
 
-interface PageHeader {
-  Title: string;
-  Description?: string;
-  CreatedAt?: Date;
-  UpdatedAt?: Date;
-}
-
-interface Page {
-  header: PageHeader;
-  originalLink: string;
-  transformedLink: string;
-}
-
-const parseMarkdownFile = async (file: string): Promise<Page> => {
-  let data: string;
-  let title: string;
-
-  //@ts-expect-error
-  let header: PageHeader = {};
-
-  data = await fs.promises.readFile(file, "utf-8");
-
-  // parse header values
-  let keyValuePairs: [keyof PageHeader, string][] = data
-    .split("---")[0]
-    .trim()
-    .split("\n")
-    .map(line => {
-      const frags = line.split(":");
-
-      return [frags.shift().trim(), frags.join(":").trim()];
-    })
-    .map(([key, value]) => [toPascalCase(key) as keyof PageHeader, value]);
-
-  for (let [key, value] of keyValuePairs) {
-    if (key === "CreatedAt" || key === "UpdatedAt") {
-      header[key] = new Date(value);
-    } else {
-      header[key] = value;
-    }
-  }
-
-  // skip header
-  data = data.split("---").slice(1).join("---");
-  data = brittle(data);
-  title = header.Title ?? "Página sem título";
-  data = marked(data, {
-    gfm: true,
-    mangle: false,
-  });
-  data = replaceTemplateVariables(PAGE_TEMPLATE, {
-    page_title: title,
-    page_description: header.Description,
-    page_body: data,
-    current_year: "" + new Date().getFullYear(),
-    page_info: buildPageInfo(
-      "Lucas Bortoli",
-      header.CreatedAt,
-      header.UpdatedAt
-    ),
-  });
-
-  const relPath = relative(ARTICLES_DIRECTORY, file);
-
-  // Convert title into PascalCase and add extension
-  const newBasename = join(dirname(relPath), toPascalCase(title) + ".html");
-
-  const outPath = join(OUTPUT_DIRECTORY, newBasename + ".unresolved");
+  const outPath = join(
+    OUTPUT_DIRECTORY,
+    article.linkTarget + ".html.unresolved"
+  );
 
   await fs.promises.mkdir(dirname(outPath), { recursive: true });
-  await fs.promises.writeFile(outPath, data);
+  await fs.promises.writeFile(outPath, article.body);
 
-  return {
-    header: header,
-    originalLink: basename(relPath),
-    transformedLink: newBasename,
-  };
+  return article;
 };
 
-const resolveLinks = async (pages: Page[]) => {
+const resolveLinks = async (pages: Article[]) => {
   for await (const fileAbs of walk(OUTPUT_DIRECTORY)) {
     if (!fileAbs.endsWith(".html.unresolved")) {
       continue;
@@ -140,11 +71,9 @@ const resolveLinks = async (pages: Page[]) => {
      */
     const modified = await replaceHrefsInHTML(text, unmodifiedHref => {
       const name = basename(unmodifiedHref);
-      const targetPage = pages.find(
-        page => page.originalLink === name
-      )?.transformedLink;
+      const targetPage = pages.find(page => page.sourceFilename === name);
 
-      return targetPage ?? unmodifiedHref;
+      return targetPage?.linkTarget ?? unmodifiedHref;
     });
 
     await fs.promises.writeFile(fileAbs.replace(".unresolved", ""), modified);
@@ -152,11 +81,31 @@ const resolveLinks = async (pages: Page[]) => {
   }
 };
 
+const generateIndexPage = async (articles: Article[]) => {
+  const INDEX_TEMPLATE = await getTemplate("index");
+
+  const sorted = articles
+    .filter(article => !article.sourceFilename.startsWith("@"))
+    .sort(
+      (a, b) => a.header.CreatedAt.getTime() - b.header.CreatedAt.getTime()
+    );
+
+  const indexContents = await brittle(INDEX_TEMPLATE, {
+    ...brittleLib,
+    articles: sorted,
+  });
+
+  await fs.promises.writeFile(
+    join(OUTPUT_DIRECTORY, "index.html"),
+    indexContents
+  );
+};
+
 const main = async () => {
   // Clean output directory
   await fs.promises.rm(OUTPUT_DIRECTORY, { recursive: true, force: true });
 
-  const generatedArticles: Page[] = [];
+  const generatedArticles: Article[] = [];
 
   for await (const file of walk(ARTICLES_DIRECTORY)) {
     const relativeToArticles = relative(ARTICLES_DIRECTORY, file);
@@ -178,6 +127,9 @@ const main = async () => {
 
   // Second pass: resolve links
   await resolveLinks(generatedArticles);
+
+  // Generate index
+  await generateIndexPage(generatedArticles);
 
   // Copy static files
   await copyDirChildren(STATIC_DIRECTORY, OUTPUT_DIRECTORY);

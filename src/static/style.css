@@ -1,158 +1,166 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap');
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("/fonts/BebasNeue-Regular.ttf");
+}
 
 html,
 body {
-	margin: 0;
-	--sidebar-width: 540px;
-	--sidebar-space-left: 8rem;
-	--color-primary: #ffca85;
-	--color-text: #323232;
-	--color-text-secondary: #646464;
-	--color-link: #b77117;
-	font-family: 'Montserrat', Verdana, Geneva, Tahoma, sans-serif;
-	font-size: 18px;
+  margin: 0;
+  --sidebar-width: 540px;
+  --sidebar-space-left: 8rem;
+  --color-primary: #ffca85;
+  --color-text: #323232;
+  --color-text-secondary: #646464;
+  --color-link: #b77117;
+  font-family: "Montserrat", Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
 }
 
 ::selection {
-	background-color: var(--color-primary);
-	color: black;
+  background-color: var(--color-primary);
+  color: black;
 }
 
 .header ul {
-	list-style: none;
+  list-style: none;
 }
 
 a {
-	color: blue;
-	text-decoration: none;
+  color: blue;
+  text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .sidebar {
-	display: flex;
-	flex-direction: column;
-	background-color: #f0f0f0;
-	width: var(--sidebar-width);
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  width: var(--sidebar-width);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
 }
 
 .sidebar .logo {
-	font-family: "Bebas Neue", sans-serif;
-	color: var(--color-text);
-	font-size: 72px;
-	display: inline-block;
-	padding: 1rem;
-	padding-left: var(--sidebar-space-left);
-	background-color: var(--color-primary);
-	line-height: 1;
+  font-family: "Bebas Neue", sans-serif;
+  color: var(--color-text);
+  font-size: 72px;
+  display: inline-block;
+  padding: 1rem;
+  padding-left: var(--sidebar-space-left);
+  background-color: var(--color-primary);
+  line-height: 1;
 }
 
 .sidebar .article-title {
-	font-family: "Bebas Neue", sans-serif;
-	color: var(--color-text);
-	font-size: 48px;
-	display: inline-block;
-	padding: 1rem;
+  font-family: "Bebas Neue", sans-serif;
+  color: var(--color-text);
+  font-size: 48px;
+  display: inline-block;
+  padding: 1rem;
 }
 
 .sidebar nav {
-	display: flex;
-	flex-direction: column;
-	padding: 2rem;
-	padding-left: var(--sidebar-space-left);
-	align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  padding-left: var(--sidebar-space-left);
+  align-items: flex-start;
 }
 
 .sidebar nav a {
-	padding: 1rem 2rem;
-	font-size: 1.75rem;
-	background-color: white;
-	font-family: "Bebas Neue", sans-serif;
-	color: var(--color-text);
-	text-decoration: none;
+  padding: 1rem 2rem;
+  font-size: 1.75rem;
+  background-color: white;
+  font-family: "Bebas Neue", sans-serif;
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 .copyright {
-	padding: 1rem 2rem;
-	padding-left: var(--sidebar-space-left);
-	font-size: 1rem;
-	color: var(--color-text-secondary);
+  padding: 1rem 2rem;
+  padding-left: var(--sidebar-space-left);
+  font-size: 1rem;
+  color: var(--color-text-secondary);
 }
 
 .article {
-	padding: 1rem;
-	padding-top: 0;
-	max-width: 80ch;
-	width: 100%;
-	box-sizing: border-box;
+  padding: 1rem;
+  padding-top: 0;
+  max-width: 80ch;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .article-wrapper {
-	width: calc(100% - var(--sidebar-width));
-	position: absolute;
-	top: 0;
-	right: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  width: calc(100% - var(--sidebar-width));
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (max-width: 1280px) {
-	html,
-	body {
-		--sidebar-width: 460px;
-		--sidebar-space-left: 4rem;
-	}
+  html,
+  body {
+    --sidebar-width: 460px;
+    --sidebar-space-left: 4rem;
+  }
 }
 
 @media screen and (max-width: 992px) {
-	html,
-	body {
-		--sidebar-width: 320px;
-		--sidebar-space-left: 2rem;
-	}
+  html,
+  body {
+    --sidebar-width: 320px;
+    --sidebar-space-left: 2rem;
+  }
 
-	.sidebar nav {
-		align-items: stretch;
-		gap: 0.25rem;
-		text-align: center;
-	}
+  .sidebar nav {
+    align-items: stretch;
+    gap: 0.25rem;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 720px) {
-	html,
-	body {
-		font-size: 12px;
-		--sidebar-width: 0px;
-	}
+  html,
+  body {
+    font-size: 12px;
+    --sidebar-width: 0px;
+  }
 
-	.article-wrapper {
-		position: static;
-	}
+  .article-wrapper {
+    position: static;
+  }
 
-	.sidebar .logo {
-		font-size: 36px;
-		align-items: center;
-		display: flex;
-	}
+  .sidebar .logo {
+    font-size: 36px;
+    align-items: center;
+    display: flex;
+  }
 
-	.sidebar {
-		position: unset;
-		width: 100%;
-		height: auto;
-	}
+  .sidebar {
+    position: unset;
+    width: 100%;
+    height: auto;
+  }
 
-	.sidebar .copyright {
-		display: none;
-	}
+  .sidebar .copyright {
+    display: none;
+  }
 
-	.article {
-		margin-left: unset;
-	}
+  .article {
+    margin-left: unset;
+  }
 }

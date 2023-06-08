@@ -1,8 +1,10 @@
 {
-	"compilerOptions": {
-		"module": "ES2022",
-		"moduleResolution": "node",
-		"target": "ES2022",
-		"allowSyntheticDefaultImports": true
-	}
+  "compilerOptions": {
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  }
 }

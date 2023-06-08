@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="article.css" />
+    <link rel="stylesheet" href="homepage.css" />
+    <link rel="stylesheet" href="code-hljs.css" />
+    <title>Index - My Aunt's Basement</title>
+  </head>
+
+  <body>
+    <!-- Don't ask me. https://stackoverflow.com/a/57888310 -->
+    <script>
+      0;
+    </script>
+    [=`context.importPartial('sidebar', context);`]
+    <div class="article-wrapper">
+      <article class="article">
+        <header>
+          <h1 class="title">Homepage</h1>
+        </header>
+        <p>These are all the articles I ever wrote here.</p>
+        <ol class="article-list">
+          [`for (const article of context.articles) {`]
+          <li>
+            <a href="[=`article.linkTarget`].html" class="article-card-link">
+              <div class="article-card">
+                <p class="title">[=`article.header.Title`]</p>
+                <div class="information">
+                  <span
+                    >[=`article.header.CreatedAt.toLocaleDateString('pt-BR')`]</span
+                  >
+
+                  [`let estimate = article.estimatedTimeToRead`]
+                  <span>
+                    [`let min =
+                    Math.round(article.estimatedTimeToRead.minutes);`] [=`min
+                    +(min === 1 ? " minute" : " minutes")`]
+                  </span>
+                  &middot; <span>[=`estimate.words`] words</span> &middot;
+                </div>
+                [`if (article.header.Description) {`]
+                <p class="description">[=`article.header.Description`]</p>
+                [`}`]
+              </div>
+            </a>
+          </li>
+          [`}`]
+        </ol>
+      </article>
+    </div>
+  </body>
+</html>

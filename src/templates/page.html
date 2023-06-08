@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="article.css" />
-		<link rel="stylesheet" href="code-hljs.css" />
-		<title>{page_title}</title>
-	</head>
-	<body>
-		<!-- Don't ask me. https://stackoverflow.com/a/57888310 -->
-		<script>
-			0;
-		</script>
 
-		<div class="sidebar">
-			<div class="logo">My Aunt's Basement</div>
-			<nav>
-				<a href="/">Homepage</a>
-				<a href="/ContactMe.html">Contact me</a>
-				<a href="/">My other projects</a>
-				<a href="/">What is this site about?</a>
-			</nav>
-			<p class="copyright">
-				Copyright © {current_year}<br />
-				Lucas Vinicius de Bortoli Santos<br />
-				All rights reserved.
-			</p>
-		</div>
-		<div class="article-wrapper">
-			<article class="article">
-				<header>			
-					<h1 class="title">{page_title}</h1>
-					<p class="description">{page_description}</p>
-					<p class="info">{page_info}</p>
-				</header>
-				{page_body}
-				<!-- <footer>{footer_info}</footer> -->
-			</article>
-		</div>
-	</body>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="article.css" />
+	<link rel="stylesheet" href="code-hljs.css" />
+	<title>[=`context.page_title`] - My Aunt's Basement</title>
+</head>
+
+<body>
+	<!-- Don't ask me. https://stackoverflow.com/a/57888310 -->
+	<script>
+		0;
+	</script>
+	[=`context.importPartial('sidebar', context);`]
+	<div class="article-wrapper">
+		<article class="article">
+			<header>
+				<h1 class="title">[=`context.page_title`]</h1>
+				<p class="description">[=`context.page_description`]</p>
+				<p class="info">[=`context.page_info`]</p>
+			</header>
+			[=`context.page_body`]
+		</article>
+	</div>
+</body>
+
 </html>

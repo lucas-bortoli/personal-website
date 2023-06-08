@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { TEMPLATE_DIRECTORY } from "./constants.js";
 
 export async function* walk(dir: string): AsyncGenerator<string> {
   for await (const d of await fs.promises.opendir(dir)) {
@@ -8,12 +9,6 @@ export async function* walk(dir: string): AsyncGenerator<string> {
     else if (d.isFile()) yield entry;
   }
 }
-
-export const extractTitleFromMarkdown = (source: string): string | null => {
-  const titleRegex = /^\s*#{1,6}\s?(.*)/m;
-
-  return source.match(titleRegex)[1] ?? null;
-};
 
 export async function copyDirChildren(src, dest) {
   await fs.promises.mkdir(dest, { recursive: true });
@@ -42,43 +37,39 @@ export async function replaceHrefsInHTML(
   return sourceText.replace(hrefMatch, (_, link) => `href="${replacer(link)}"`);
 }
 
-/**
- * Replaces every {placeholder} in the given template with a value from the
- * dictionary.
- */
-export const replaceTemplateVariables = (
-  template: string,
-  variables: Record<string, string>
-): string => {
-  /**
-   * Matches every {placeholder}. The variable inside the brackets is stored
-   * in the "variableName" group.
-   */
-  const exp = /{(?<variableName>[a-zA-Z_\-]*)}/gm;
-
-  return template.replace(exp, (a, b, c, d, groups: Record<string, string>) => {
-    return variables[groups.variableName] ?? "";
-  });
+export const dateHuman = (date: Date): string => {
+  return date.toLocaleDateString("pt-BR");
 };
 
-export const dateHuman = (date: Date): string => {
-	return date.toLocaleDateString("pt-BR");
-}
+export const buildPageInfo = (
+  author: string,
+  created?: Date,
+  updated?: Date
+): string => {
+  const fragments: string[] = [];
 
-export const buildPageInfo = (author: string, created?: Date, updated?: Date): string => {
-	const fragments: string[] = [];
+  if (created) {
+    if (updated && dateHuman(created) !== dateHuman(updated)) {
+      fragments.push(`Modified ${dateHuman(updated)}`);
+    }
 
-	if (created) {
-		if (updated && dateHuman(created) !== dateHuman(updated)) {
-			fragments.push(`Modified ${dateHuman(updated)}`);
-		}
+    fragments.push(`Published ${dateHuman(created)}`);
+  } else if (updated) {
+    fragments.push(dateHuman(updated));
+  }
 
-		fragments.push(`Published ${dateHuman(created)}`);
-	} else if (updated) {
-		fragments.push(dateHuman(updated));
-	}
+  fragments.push(author);
 
-	fragments.push(author);
+  return fragments.join(" · ");
+};
 
-	return fragments.join(" · ");
-}
+export const getTemplate = (name: string): Promise<string> => {
+  return fs.promises.readFile(
+    path.join(TEMPLATE_DIRECTORY, name.replace(".html", "") + ".html"),
+    "utf-8"
+  );
+};
+
+export const plural = (count: number, singular: string, plural: string) => {
+  return count === 1 ? singular : plural;
+};
