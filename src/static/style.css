@@ -31,7 +31,7 @@ body {
 }
 
 a {
-  color: blue;
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -84,9 +84,47 @@ a:hover {
   font-family: "Bebas Neue", sans-serif;
   color: var(--color-text);
   text-decoration: none;
+
+  transform: translateX(0);
+  transition: background-color, transform;
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
 }
 
-.copyright {
+.sidebar nav a:is(:hover, :focus) {
+  transform: translateX(5px);
+  background-color: var(--color-primary);
+}
+
+.sidebar nav a:active {
+  transform: translateX(5px);
+  background-color: var(--color-text);
+  color: white;
+}
+
+.sidebar .contact {
+  list-style: none;
+  padding-left: var(--sidebar-space-left);
+  padding-right: 1em;
+}
+
+.sidebar .contact li {
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+  margin-bottom: 0.5em;
+}
+
+.sidebar .contact li img {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.sidebar .contact li a {
+  word-break: break-word;
+}
+
+.sidebar .copyright {
   padding: 1rem 2rem;
   padding-left: var(--sidebar-space-left);
   font-size: 1rem;
@@ -154,6 +192,10 @@ a:hover {
     position: unset;
     width: 100%;
     height: auto;
+  }
+
+  .sidebar .contact {
+    font-size: 1.3rem;
   }
 
   .sidebar .copyright {

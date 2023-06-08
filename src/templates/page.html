@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="article.css" />
+    <link rel="stylesheet" href="code-hljs.css" />
+    <title>[=`context.page_title`] - My Aunt's Basement</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="article.css" />
-	<link rel="stylesheet" href="code-hljs.css" />
-	<title>[=`context.page_title`] - My Aunt's Basement</title>
-</head>
-
-<body>
-	<!-- Don't ask me. https://stackoverflow.com/a/57888310 -->
-	<script>
-		0;
-	</script>
-	[=`context.importPartial('sidebar', context);`]
-	<div class="article-wrapper">
-		<article class="article">
-			<header>
-				<h1 class="title">[=`context.page_title`]</h1>
-				<p class="description">[=`context.page_description`]</p>
-				<p class="info">[=`context.page_info`]</p>
-			</header>
-			[=`context.page_body`]
-		</article>
-	</div>
-</body>
-
+  <body>
+    <!-- Don't ask me. https://stackoverflow.com/a/57888310 -->
+    <script>
+      0;
+    </script>
+    [=`context.importPartial('sidebar', context);`]
+    <div class="article-wrapper">
+      <article class="article">
+        <header>
+          <h1 class="title">[=`context.page_title`]</h1>
+          <p class="description">[=`context.page_description`]</p>
+          <p class="info">[=`context.page_info`]</p>
+        </header>
+        [=`context.page_body`]
+      </article>
+    </div>
+  </body>
 </html>
