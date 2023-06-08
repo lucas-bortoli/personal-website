@@ -1,66 +1,70 @@
 .article a {
-	color: var(--color-link);
+  color: var(--color-link);
 }
 
 .article a:active {
-	color: var(--color-text);
-	background-color: var(--color-primary);
+  color: var(--color-text);
+  background-color: var(--color-primary);
 }
 
 .article {
-	font-size: 1rem;
-	line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .article > header {
-	border-bottom: 2px dashed var(--color-primary);
+  border-bottom: 2px dashed var(--color-primary);
 }
 
 .article > header > .title {
-	font-family: "Bebas Neue", sans-serif;
-	font-size: 72px;
-	text-transform: capitalize;
-	line-height: 1;
-	margin: 1rem 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 72px;
+  text-transform: capitalize;
+  line-height: 1;
+  margin: 1rem 0;
 }
 
 .article > header > .description {
-	font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .article > header > .info {
-	color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .article footer {
-	padding-top: 10rem;
-	padding-bottom: 5rem;
-	color: var(--color-text-secondary);
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+  color: var(--color-text-secondary);
 }
 
 .article code {
-	padding: 3px 6px;
-	border: 1px solid #ccc;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+}
+
+.article :is(img, video, iframe) {
+  max-width: 100%;
 }
 
 @media screen and (max-width: 1280px) {
 }
 
 @media screen and (max-width: 992px) {
-	.article > .title {
-		font-size: 48px;
-	}
+  .article > .title {
+    font-size: 48px;
+  }
 }
 
 @media screen and (max-width: 720px) {
-	.article > .title {
-		font-size: 36px;
-		margin-top: 1rem !important;
-		margin-bottom: 1rem !important;
-		height: unset !important;
-	}
+  .article > .title {
+    font-size: 36px;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    height: unset !important;
+  }
 
-	.article {
-		font-size: 16px;
-	}
+  .article {
+    font-size: 16px;
+  }
 }

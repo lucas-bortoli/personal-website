@@ -87,7 +87,7 @@ const generateIndexPage = async (articles: Article[]) => {
   const sorted = articles
     .filter(article => !article.sourceFilename.startsWith("@"))
     .sort(
-      (a, b) => a.header.CreatedAt.getTime() - b.header.CreatedAt.getTime()
+      (a, b) => b.header.CreatedAt.getTime() - a.header.CreatedAt.getTime()
     );
 
   const indexContents = await brittle(INDEX_TEMPLATE, {
