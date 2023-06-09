@@ -171,6 +171,7 @@ a:hover {
   }
 }
 
+/* "Mobile" styles */
 @media screen and (max-width: 720px) {
   html,
   body {

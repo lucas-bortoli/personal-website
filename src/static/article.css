@@ -57,12 +57,10 @@
   }
 }
 
+/* "Mobile" styles */
 @media screen and (max-width: 720px) {
-  .article > .title {
-    font-size: 36px;
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
-    height: unset !important;
+  .article > header > .title {
+    font-size: 15vw;
   }
 
   .article {
