@@ -42,7 +42,7 @@ a:hover {
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #f0f0f0;
+  background-color: #fff;
   width: var(--sidebar-width);
   position: fixed;
   top: 0;
@@ -80,7 +80,7 @@ a:hover {
 .sidebar nav a {
   padding: 1rem 2rem;
   font-size: 1.75rem;
-  background-color: white;
+  background-color: #f0f0f0;
   font-family: "Bebas Neue", sans-serif;
   color: var(--color-text);
   text-decoration: none;
@@ -132,7 +132,7 @@ a:hover {
 }
 
 .article {
-  padding: 1rem;
+  padding: 2rem;
   padding-top: 0;
   max-width: 80ch;
   width: 100%;
@@ -203,6 +203,7 @@ a:hover {
   }
 
   .article {
+    padding-top: 2rem;
     margin-left: unset;
   }
 }
